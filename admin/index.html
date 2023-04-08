@@ -22,42 +22,84 @@
           <th>Aggarbati</th>
           <th>Weight</th>
           <th>Price</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody id="table-body">
       </tbody>
     </table>
   </div>
+  
+</body>
 
   <script>
-    // Fetch data from server and populate the table
-    const tableBody = document.getElementById('table-body');
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const data = JSON.parse(xhr.responseText);
-        data.forEach(function(row) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.name}</td>
-            <td>${row.address}</td>
-            <td>${row.village}</td>
-            <td>${row.taluka}</td>
-            <td>${row.district}</td>
-            <td>${row.pincode}</td>
-            <td>${row.mobile}</td>
-            <td>${row.invoice_date}</td>
-            <td>${row.aggarbati}</td>
-            <td>${row.weight}</td>
-            <td>${row.weight * 300}</td>
-          `;
-          tableBody.appendChild(tr);
-        });
-      }
-    };
-    xhr.open('GET', '/forms');
-    xhr.send();
-  </script>
-</body>
+   const tableBody = document.getElementById('table-body');
+
+fetch('https://hathibrand-form.onrender.com/forms')
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(function(row) {
+      const tr = document.createElement('tr');
+      const idTd = document.createElement('td');
+      idTd.textContent = row.id;
+      tr.appendChild(idTd);
+      const nameTd = document.createElement('td');
+      nameTd.textContent = row.name;
+      tr.appendChild(nameTd);
+      const addressTd = document.createElement('td');
+      addressTd.textContent = row.address;
+      tr.appendChild(addressTd);
+      const villageTd = document.createElement('td');
+      villageTd.textContent = row.village;
+      tr.appendChild(villageTd);
+      const talukaTd = document.createElement('td');
+      talukaTd.textContent = row.taluka;
+      tr.appendChild(talukaTd);
+      const districtTd = document.createElement('td');
+      districtTd.textContent = row.district;
+      tr.appendChild(districtTd);
+      const pincodeTd = document.createElement('td');
+      pincodeTd.textContent = row.pincode;
+      tr.appendChild(pincodeTd);
+      const mobileTd = document.createElement('td');
+      mobileTd.textContent = row.mobile;
+      tr.appendChild(mobileTd);
+      const invoiceDateTd = document.createElement('td');
+      invoiceDateTd.textContent = row.invoice_date;
+      tr.appendChild(invoiceDateTd);
+      const aggarbatiTd = document.createElement('td');
+      aggarbatiTd.textContent = row.aggarbati;
+      tr.appendChild(aggarbatiTd);
+      const weightTd = document.createElement('td');
+      weightTd.textContent = row.weight;
+      tr.appendChild(weightTd);
+      const priceTd = document.createElement('td');
+      priceTd.textContent = row.weight * 300;
+      tr.appendChild(priceTd);
+      const printButtonTd = document.createElement('td');
+      const printButton = document.createElement('button');
+      printButton.textContent = 'Print';
+      printButton.onclick = function() {
+        printInvoice(row);
+      };
+      printButtonTd.appendChild(printButton);
+      tr.appendChild(printButtonTd);
+      tableBody.appendChild(tr);
+    });
+  })
+  .catch(error => console.error(error));
+
+const printInvoice = (row) => {
+  console.log('first');
+  window.location.href = `print.html?id=${row.id}`;
+};
+
+
+
+</script>
+
+
+
+
+  
 </html>

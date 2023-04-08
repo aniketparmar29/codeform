@@ -1,0 +1,91 @@
+    <html>
+      <head>
+        <title>Invoice</title>
+        <style>
+          /* Add your custom styles for the invoice here */
+          body {
+            font-family: Arial, sans-serif;
+          }
+          table {
+            border-collapse: collapse;
+            width: 100%;
+          }
+          th, td {
+            border: 1px solid black;
+            padding: 5px;
+          }
+          th {
+            background-color: #ccc;
+          }
+          .title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="title">Invoice</div>
+        <body id="container">
+            <table id="data-table">
+                <tbody>
+                  <!-- Data row will be added dynamically with JavaScript -->
+                </tbody>
+              </table>
+            <a href="#" id="print">GENERATE PDF!</a>
+        </body>
+        <script>
+          // Print the invoice
+          document.addEventListener("DOMContentLoaded", () => {
+    let printLink = document.getElementById("print");
+    let container = document.getElementById("container");
+
+    printLink.addEventListener("click", event => {
+        event.preventDefault();
+        printLink.style.display = "none";
+        window.print();
+    }, false);
+
+    container.addEventListener("click", event => {
+        printLink.style.display = "flex";
+    }, false);
+
+}, false);
+
+          // Get the item ID from the URL parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const itemId = urlParams.get('id');
+
+      // Fetch the item data for the specified ID
+// Fetch the item data for the specified ID
+fetch(`http://localhost:4000/forms/${itemId}`)
+    .then(response => response.json())
+    .then(item => {
+      // Add a row for each field in the item data
+      addDataRow('Custumer Name', item.name);
+      addDataRow('Address', item.address);
+      addDataRow('Village', item.village);
+      addDataRow('Taluka', item.taluka);
+      addDataRow('District', item.district);
+      addDataRow('Pincode', item.pincode);
+      addDataRow('Mobile', item.mobile);
+      addDataRow('Invoice Date', item.invoice_date);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+  // Function to add a new data row to the table
+  function addDataRow(label, value) {
+    let row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${label}:</td>
+      <td>${value}</td>
+    `;
+    document.querySelector('#data-table tbody').appendChild(row);
+  }
+
+
+    </script>
+    </html>

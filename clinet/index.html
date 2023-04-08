@@ -84,8 +84,12 @@ form.addEventListener('submit',async function(event) {
     return;
   }
   
-  const invoice_date = new Date().toISOString().slice(0, 10);
-  // If validation passes, submit the form
+  // If validation passes, submit the formconst date = new Date();
+const day = date.getDate().toString().padStart(2, '0');
+const month = (date.getMonth() + 1).toString().padStart(2, '0');
+const year = date.getFullYear().toString();
+const invoice_date = `${day}/${month}/${year}`;
+
   // You can use AJAX to submit the form data to your server or process it however you like
   // For example:
   const opop = {
