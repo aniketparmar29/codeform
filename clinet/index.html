@@ -85,10 +85,15 @@ form.addEventListener('submit',async function(event) {
   }
   
   // If validation passes, submit the formconst date = new Date();
-const day = date.getDate().toString().padStart(2, '0');
-const month = (date.getMonth() + 1).toString().padStart(2, '0');
-const year = date.getFullYear().toString();
-const invoice_date = `${day}/${month}/${year}`;
+  const today = new Date();
+const yyyy = today.getFullYear();
+let mm = today.getMonth() + 1; // Months start at 0!
+let dd = today.getDate();
+
+if (dd < 10) dd = '0' + dd;
+if (mm < 10) mm = '0' + mm;
+
+const invoice_date = dd + '/' + mm + '/' + yyyy;
 
   // You can use AJAX to submit the form data to your server or process it however you like
   // For example:
