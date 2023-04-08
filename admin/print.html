@@ -27,12 +27,24 @@
       </head>
       <body>
         <div class="title">Invoice</div>
+        <h5>Business parcel</h5>
+        <h5>CASH ON DELIVERY TOTAL : <span id="total"></span> </h5>
+        <h5>Payment of Office: KADI LSG S.0-384440</h5>
         <body id="container">
             <table id="data-table">
                 <tbody>
-                  <!-- Data row will be added dynamically with JavaScript -->
+                    <!-- Data row will be added dynamically with JavaScript -->
                 </tbody>
-              </table>
+            </table>
+            <pre>FROM: Hathibrand-Agarbatti(afzal makawana)
+      Lathidad,
+      Botad: 364710
+      Botad (GUJARAT)
+      MO-9638857089
+                </pre>
+                <pre> નોંધ:૧) COD Parcel છે માટે VP કમીસન લગાવું નહિ. 
+     ૨)પાર્સલ ડેટા ઇસ્યુ ના કારણે પરત કરતા પેહલા 9638857089 પર સંપર્ક કરવો.
+                </pre>
             <a href="#" id="print">GENERATE PDF!</a>
         </body>
         <script>
@@ -56,12 +68,13 @@
           // Get the item ID from the URL parameter
       const urlParams = new URLSearchParams(window.location.search);
       const itemId = urlParams.get('id');
-
+let data;
       // Fetch the item data for the specified ID
 // Fetch the item data for the specified ID
-fetch(`http://localhost:4000/forms/${itemId}`)
+fetch(`https://hathibrand-form.onrender.com/forms/${itemId}`)
     .then(response => response.json())
     .then(item => {
+        data=item
       // Add a row for each field in the item data
       addDataRow('Custumer Name', item.name);
       addDataRow('Address', item.address);
@@ -84,6 +97,8 @@ fetch(`http://localhost:4000/forms/${itemId}`)
       <td>${value}</td>
     `;
     document.querySelector('#data-table tbody').appendChild(row);
+    let total = document.getElementById("total");
+total.innerText=data.weight*300
   }
 
 
