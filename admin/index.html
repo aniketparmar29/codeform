@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>COD Forms Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2>COD Forms Dashboard</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Village</th>
+          <th>Taluka</th>
+          <th>District</th>
+          <th>Pincode</th>
+          <th>Mobile</th>
+          <th>Invoice Date</th>
+          <th>Aggarbati</th>
+          <th>Weight</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Fetch data from server and populate the table
+    const tableBody = document.getElementById('table-body');
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        data.forEach(function(row) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.name}</td>
+            <td>${row.address}</td>
+            <td>${row.village}</td>
+            <td>${row.taluka}</td>
+            <td>${row.district}</td>
+            <td>${row.pincode}</td>
+            <td>${row.mobile}</td>
+            <td>${row.invoice_date}</td>
+            <td>${row.aggarbati}</td>
+            <td>${row.weight}</td>
+            <td>${row.weight * 300}</td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+    };
+    xhr.open('GET', '/forms');
+    xhr.send();
+  </script>
+</body>
+</html>
