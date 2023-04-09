@@ -26,10 +26,18 @@
         </style>
       </head>
       <body>
-        <div class="title">Invoice</div>
-        <h5>Business parcel</h5>
-        <h5>CASH ON DELIVERY TOTAL : <span id="total"></span> </h5>
-        <h5>Payment of Office: KADI LSG S.0-384440</h5>
+       <div  style="display: flex; justify-content: space-around;">
+
+         <div>
+           <h5>Business parcel</h5>
+           <h5>CASH ON DELIVERY TOTAL : <span id="total"></span> </h5>
+           <h5>Payment of Office: BOTADMDG 364710</h5>
+          </div>
+          <div>
+            <h5 id="opop"></h5>
+            <h5 id="vajan"></h5>
+          </div>
+        </div> 
         <body id="container">
             <table id="data-table">
                 <tbody>
@@ -98,7 +106,11 @@ fetch(`https://hathibrand-form.onrender.com/forms/${itemId}`)
     `;
     document.querySelector('#data-table tbody').appendChild(row);
     let total = document.getElementById("total");
-total.innerText=data.weight*300
+total.innerText=data.weight*299
+    let opop = document.getElementById("opop");
+opop.innerText="ItemName: "+data.aggarbati
+    let vajan = document.getElementById("vajan");
+vajan.innerText="Weight: "+data.weight
   }
 
 
