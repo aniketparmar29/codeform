@@ -53,7 +53,7 @@
           <input type="text" class="form-control" id="aggarbati" value="ફુલવાડી" name="aggarbati" placeholder="અગરબતી નામ">
           
             </div>
-            <button type="submit" class="btn btn-primary">સબમિટ કરો</button>
+            <button type="submit" id="opji" class="btn btn-primary">સબમિટ કરો</button>
           </form>
       
 </div>
@@ -64,6 +64,7 @@
 </html>    
 <script>
    const form = document.getElementById('form');
+   const opji = document.getElementById("opji");
 form.addEventListener('submit',async function(event) {
   event.preventDefault(); // prevent default form submission behavior
 
@@ -111,6 +112,7 @@ const invoice_date = dd + '/' + mm + '/' + yyyy;
   };
 
 try{
+    opji.disabled=true;
      let res= await  fetch('https://hathibrand-form.onrender.com/forms', {
         method: 'POST',
         headers: {
@@ -118,10 +120,11 @@ try{
         },
         body: JSON.stringify(opop)
       })
-      alert("added successfully")
+      alert("તમારો ઓર્ડર બુક થઈ ગયો છે ઓડર આપવા બદલ આપનો ખુબ ખુબ આભાર ટૂંક સમય માં તમને પાર્સલ મળી જસે")
 
  }catch(err){
 console.log(err)
+opji.disabled=false;
 alert("something went wrong")
  }
   // Use fetch API to submit form data to server
