@@ -4,6 +4,32 @@
   <title>COD Forms Dashboard</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<style>
+  .watermark {
+              color: BLACK;
+              opacity: 0.1;
+              position: absolute;
+              top: 36%;
+              left: 10%;
+          }
+          .watermark>img{
+            width: 100%;
+          }
+          @media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .watermark {
+    top: 6%;
+    left: 2%;
+  }
+}
+
+          @media only screen and (max-width: 767px) {
+  .watermark {
+    top: 10%;
+    left: 10%;
+  }
+
+}
+</style>
 <body>
   <div class="container">
     <h2>COD Forms Dashboard</h2>
@@ -28,6 +54,9 @@
       <tbody id="table-body">
       </tbody>
     </table>
+    <div class="watermark">
+      <img src="https://i.ibb.co/1b5CfT1/logo.png" alt="watermark">
+    </div>
   </div>
   
 </body>
