@@ -113,6 +113,7 @@ const deleteinvoice = (id) => {
       throw new Error('Network response was not ok');
     }
     alert("invoice deleted")
+    window.location.reload();
   })
   .catch(error => {
     console.error('There was a problem deleting the resource:', error);
