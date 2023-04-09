@@ -85,6 +85,17 @@ fetch('https://hathibrand-form.onrender.com/forms')
       printButtonTd.appendChild(printButton);
       tr.appendChild(printButtonTd);
       tableBody.appendChild(tr);
+      const DeleteButtonTd = document.createElement('td');
+      const DeleteButton = document.createElement('button');
+      DeleteButton.textContent = 'Delete';
+      DeleteButton.style.backgroundColor="red";
+      DeleteButton.style.color="white";
+      DeleteButton.onclick = function() {
+        deleteinvoice(row.id);
+      };
+      DeleteButtonTd.appendChild(DeleteButton);
+      tr.appendChild(DeleteButtonTd);
+      tableBody.appendChild(tr);
     });
   })
   .catch(error => console.error(error));
@@ -92,6 +103,22 @@ fetch('https://hathibrand-form.onrender.com/forms')
 const printInvoice = (row) => {
   console.log('first');
   window.location.href = `print.html?id=${row.id}`;
+};
+const deleteinvoice = (id) => {
+  fetch(`https://hathibrand-form.onrender.com/forms/${id}`, {
+  method: 'DELETE',
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    alert("invoice deleted")
+  })
+  .catch(error => {
+    console.error('There was a problem deleting the resource:', error);
+    alert("something went wrong")
+  });
+
 };
 
 
